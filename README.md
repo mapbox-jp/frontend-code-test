@@ -2,12 +2,13 @@
 This repository is coding test of front-end development for candidates who is on the application of Mapbox Japan.
 
 ### Question
-Select an assignment from the following.
+Select assignments from the following.
 
-1. Implement Promotion Card like below image.
+1. Implement Promotion Card like below image, and switching between pc and sp mode.
 2. Implement your original promotional component.
 
-![Videotogif](https://user-images.githubusercontent.com/88297429/140673410-3b8571a7-10e8-490b-8450-b2227bc0b777.gif)
+<img src="https://user-images.githubusercontent.com/88297429/140673602-aea90a8d-fa61-4de7-afe3-312961e748b7.png" width="700" height="621">
+<img src="https://user-images.githubusercontent.com/88297429/140673410-3b8571a7-10e8-490b-8450-b2227bc0b777.gif" width="360" height="510">
 
 ## Commands
 
