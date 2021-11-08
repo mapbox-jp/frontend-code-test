@@ -1,0 +1,13 @@
+.mapbox-promoted-popup, .mapbox-promoted-popup-wrapper {
+  width: 280px;
+  max-width: 280px !important;
+  height: 280px;
+}
+.mapbox-promoted-popup > .mapboxgl-popup-tip {
+  display: none;
+}
+.mapbox-promoted-popup > .mapboxgl-popup-content {
+  padding: 0;
+  background-color: transparent;
+  box-shadow: none;
+}
