@@ -7,6 +7,7 @@ Select an assignment from the following.
 1. Implement Promotion Card like below image.
 2. Implement your original promotional component.
 
+![Videotogif](https://user-images.githubusercontent.com/88297429/140673410-3b8571a7-10e8-490b-8450-b2227bc0b777.gif)
 
 ## Commands
 
