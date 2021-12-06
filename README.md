@@ -11,9 +11,9 @@ Select assignments from the following.
 <img src="https://user-images.githubusercontent.com/88297429/140673410-3b8571a7-10e8-490b-8450-b2227bc0b777.gif" width="360" height="510">
 
 ### How to submit?
-Request recruiter to invite your Github account to the project.
-You can make commit and push to the repository.
-When if you done your implementation, tell the recruiter.
+Create Fork repository on your github account.
+When if create branch and pull request, it will be shown at parent repository.
+And tell the recruiter.
 
 ## Commands
 
