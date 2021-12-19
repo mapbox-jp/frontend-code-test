@@ -1,8 +1,11 @@
 import React, { useRef, useEffect, useState, useImperativeHandle } from 'react';
+import mapboxgl from 'mapbox-gl';
+import { useMediaQuery } from 'react-responsive'
 import ActionItem from './ActionItem';
 import MenuItem from './MenuItem';
 import PromotionTag from '../PromotionTag';
 import { ICON_TYPE } from '../Icon';
+import Icon from "../Icon"
 import {
   Container,
   Wrapper,
@@ -20,8 +23,12 @@ import {
   ActionSpace,
   MenuContainer,
   Menu,
+  ToggleButton,
+  HorizontalBar,
+  Border,
 } from './styles';
 import './styles.css';
+import { devices } from '../App/breakpoints';
 
 type Props = {
   feature: mapboxgl.MapboxGeoJSONFeature;
@@ -34,10 +41,17 @@ export type Handlers = {
 const PromotionPopup: React.ForwardRefRenderFunction<Handlers, Props> = (props, ref) => {
   const { feature } = props;
   const properties = feature.properties;
-  const { adid, name_ja, address_ja, phone_number, subtitle, promotion_banner, promotion_banner_width, promotion_banner_height, open, close } = properties;
+  const { adid, name_ja, address_ja, phone_number, subtitle, promotion_banner, promotion_banner_width, promotion_banner_height, open, close, promotion_card } = properties;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [isFadeout, setIsFadeout] = useState(false);
+  const [isExpanded, setExpanded] = useState(false);
+
+  const isDesktopOrLaptop = useMediaQuery({
+    query: devices.desktopOrLaptop
+  })
+  
+  const toggleAction = () => setExpanded(!isExpanded);
 
   useImperativeHandle(ref, () => ({
     remove: () => {
@@ -91,7 +105,7 @@ const PromotionPopup: React.ForwardRefRenderFunction<Handlers, Props> = (props, 
       <Wrapper>
         <Banner>
           <BannerImg
-            src={promotion_banner}
+            src={isDesktopOrLaptop ? promotion_card : promotion_banner}
             width={promotion_banner_width || ''}
             height={promotion_banner_height || ''}
           />
@@ -115,15 +129,6 @@ const PromotionPopup: React.ForwardRefRenderFunction<Handlers, Props> = (props, 
             )}
           </Header>
           {properties && (
-            <MenuContainer>
-              <Menu>
-                <MenuItem value={address_ja} iconType={ICON_TYPE.MAP_MARKER_ALT} />
-                <MenuItem value={phone_number} iconType={ICON_TYPE.PHONE} />
-                <MenuItem value={`営業時間: ${open} ~ ${close}`} iconType={ICON_TYPE.CLOCK} />
-              </Menu>
-            </MenuContainer>
-          )}
-          {properties && (
             <ActionsContainer>
               <Actions>
                 <ActionSpace />
@@ -133,6 +138,23 @@ const PromotionPopup: React.ForwardRefRenderFunction<Handlers, Props> = (props, 
                 <ActionSpace />
               </Actions>
             </ActionsContainer>
+          )}
+        </Content>
+        {isDesktopOrLaptop && <Border></Border>}
+        {!isDesktopOrLaptop && <HorizontalBar>
+          <ToggleButton onClick={toggleAction} isExpanded={isExpanded}>
+            <Icon type={isExpanded ? ICON_TYPE.CHEVRON_UP : ICON_TYPE.CHEVRON_DOWN} />
+          </ToggleButton>
+        </HorizontalBar>}
+        <Content hideContent={!isDesktopOrLaptop && !isExpanded}>
+          {properties && (
+            <MenuContainer>
+              <Menu>
+                <MenuItem value={address_ja} iconType={ICON_TYPE.MAP_MARKER_ALT} />
+                <MenuItem value={phone_number} iconType={ICON_TYPE.PHONE} />
+                <MenuItem value={`営業時間: ${open} ~ ${close}`} iconType={ICON_TYPE.CLOCK} />
+              </Menu>
+            </MenuContainer>
           )}
         </Content>
       </Wrapper>

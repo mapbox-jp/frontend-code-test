@@ -22,10 +22,6 @@ const App: React.FC = () => {
     });
 
     const showPopup = (feature: mapboxgl.MapboxGeoJSONFeature) => {
-      if (popupRef.current) {
-        popupRef.current.remove();
-        popupRef.current = null;
-      }
       const properties = feature.properties;
       const coordinates = (feature.geometry as any).coordinates.slice();
       const popupClass = `mapbox-promoted-popup-adid__${properties.adid}`;
@@ -66,6 +62,12 @@ const App: React.FC = () => {
           if (!image) { throw new Error('getting image failed.'); }
           map.addImage(event.id, image);
         });
+      });
+      map.on('preclick', () => {
+        if (popupRef.current) {
+          popupRef.current.remove();
+          popupRef.current = null;
+        }
       });
       map.on('click', 'promotion-layer', (event: mapboxgl.MapMouseEvent & { features?: mapboxgl.MapboxGeoJSONFeature[] | undefined; } & mapboxgl.EventData) => {
         const feature = event.features && event.features[0];

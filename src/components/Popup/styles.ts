@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { devices } from '../App/breakpoints';
 
 type Container = {
   isFadeout: boolean;
@@ -50,11 +51,19 @@ export const Container = styled.div`
 `;
 export const Wrapper = styled.div`
   width: 280px;
+  @media ${devices.desktopOrLaptop} {
+    width: auto;
+    display: flex;
+  }
+
   background: rgb(255, 255, 255);
   z-index: 1;
 `;
 export const Banner = styled.div`
   width: 280px;
+  @media ${devices.desktopOrLaptop} {
+    width: 150px;
+  }
 `;
 export const BannerImg = styled.img`
   display: block;
@@ -64,6 +73,15 @@ export const BannerImg = styled.img`
 `;
 export const Content = styled.div`
   padding: 16px;
+  @media ${devices.desktopOrLaptop} {
+    width: 270px;
+  }
+  display: ${({ hideContent }) => hideContent ? 'none' : 'block' };
+`;
+export const Border = styled.div`
+  margin: 15px 0 15px 0;
+  width: 1px;
+  background-color: rgb(242,242,246);
 `;
 export const Header = styled.div`
   position: relative;
@@ -107,4 +125,13 @@ export const ActionSpace = styled.li`
   width: 16px;
   min-width: 16px;
   height: auto;
+`;
+export const HorizontalBar = styled.div`
+  text-align: center;
+`;
+export const ToggleButton = styled.div`
+  margin-bottom: ${({ isExpanded }) => isExpanded ? '0' : '10px' };
+  font-size: 15px;
+  display: inline-block;
+  color: rgb(26, 115, 232);
 `;
