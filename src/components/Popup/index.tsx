@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState, useImperativeHandle } from 'react';
+import mapboxgl from 'mapbox-gl';
 import ActionItem from './ActionItem';
 import MenuItem from './MenuItem';
 import PromotionTag from '../PromotionTag';
